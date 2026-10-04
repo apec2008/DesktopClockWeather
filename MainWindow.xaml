@@ -1,0 +1,263 @@
+<Window x:Class="DesktopClockWeather.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        ResizeMode="NoResize"
+        Topmost="False"
+        SnapsToDevicePixels="True"
+        UseLayoutRounding="True"
+        MouseEnter="Window_MouseEnter"
+        MouseLeave="Window_MouseLeave">
+
+    <Grid x:Name="Root"
+          Background="#01000000"
+          MouseLeftButtonDown="Root_MouseLeftButtonDown">
+
+        <StackPanel Margin="22,0,62,0"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left">
+
+            <!-- ROW 1: TIME + YEAR -->
+            <Grid x:Name="TimeRow" HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="TimeShadow"
+                           Grid.Column="0"
+                           Text="9:07 AM"
+                           FontFamily="Segoe UI"
+                           FontSize="96"
+                           FontWeight="Normal"
+                           Foreground="#68000000"
+                           Margin="1.5,1.5,0,0"/>
+
+                <TextBlock x:Name="TimeText"
+                           Grid.Column="0"
+                           Text="9:07 AM"
+                           FontFamily="Segoe UI"
+                           FontSize="96"
+                           FontWeight="Normal"
+                           Foreground="White"/>
+
+                <Grid Grid.Column="1"
+                      Width="48"
+                      Margin="7,0,0,0"
+                      VerticalAlignment="Center">
+
+                    <TextBlock x:Name="YearShadow"
+                               Text="2026"
+                               FontFamily="Segoe UI"
+                               FontSize="30"
+                               FontWeight="Normal"
+                               Foreground="#68000000"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="1,13,0,0">
+                        <TextBlock.LayoutTransform>
+                            <RotateTransform Angle="90"/>
+                        </TextBlock.LayoutTransform>
+                    </TextBlock>
+
+                    <TextBlock x:Name="YearText"
+                               Text="2026"
+                               FontFamily="Segoe UI"
+                               FontSize="30"
+                               FontWeight="Normal"
+                               Foreground="White"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,12,0,0">
+                        <TextBlock.LayoutTransform>
+                            <RotateTransform Angle="90"/>
+                        </TextBlock.LayoutTransform>
+                    </TextBlock>
+
+                    <!-- Hover menu is constrained inside the year column -->
+                    <Border x:Name="HoverToolbar"
+                            Width="44"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Margin="0,2,0,0"
+                            Background="#D026313A"
+                            BorderBrush="#BBD3DADF"
+                            BorderThickness="1"
+                            CornerRadius="2"
+                            Visibility="Collapsed">
+                        <StackPanel>
+                            <Button x:Name="CloseButton"
+                                    Height="42"
+                                    Content="×"
+                                    FontFamily="Segoe UI"
+                                    FontSize="34"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Cursor="Hand"
+                                    Click="CloseButton_Click"
+                                    ToolTip="Close"/>
+                            <Border Height="1" Background="#50708090"/>
+                            <Button x:Name="SettingsButton"
+                                    Height="42"
+                                    Content="⚙"
+                                    FontFamily="Segoe UI Symbol"
+                                    FontSize="25"
+                                    Foreground="White"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Cursor="Hand"
+                                    Click="SettingsButton_Click"
+                                    ToolTip="Settings"/>
+                            <Border Height="1" Background="#50708090"/>
+                            <Border Height="41"
+                                    Cursor="SizeAll"
+                                    MouseLeftButtonDown="DragHandle_MouseLeftButtonDown">
+                                <TextBlock Text="⠿"
+                                           FontFamily="Segoe UI Symbol"
+                                           FontSize="28"
+                                           Foreground="#C0FFFFFF"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+
+            <!-- ROW 2: strict left alignment; width never exceeds row 1 -->
+            <Grid x:Name="DateRow"
+                  Margin="0,-15,0,0"
+                  HorizontalAlignment="Left">
+                <Viewbox x:Name="DateViewbox"
+                         Stretch="Uniform"
+                         StretchDirection="DownOnly"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Center">
+                    <Grid>
+                        <TextBlock x:Name="DateLineShadow"
+                                   Text="11 SEPTEMBER · FRIDAY"
+                                   FontFamily="Segoe UI"
+                                   FontSize="31"
+                                   FontWeight="Normal"
+                                   Foreground="#68000000"
+                                   Margin="1.5,1.5,0,0"/>
+                        <TextBlock x:Name="DateLineText"
+                                   Text="11 SEPTEMBER · FRIDAY"
+                                   FontFamily="Segoe UI"
+                                   FontSize="31"
+                                   FontWeight="Normal"
+                                   Foreground="White"/>
+                    </Grid>
+                </Viewbox>
+            </Grid>
+
+            <!-- ROW 3: strict left alignment and strict right boundary.
+                 Entire row width follows row 1 width.
+                 City is ellipsized inside its own field; weather positions never move. -->
+            <Grid x:Name="WeatherRow"
+                  Margin="0,5,0,0"
+                  Height="54"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="190"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- CITY FIELD -->
+                <Grid Grid.Column="0"
+                      Width="190"
+                      Height="54"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top">
+                    <TextBlock x:Name="CityShadow"
+                               Text=""
+                               FontFamily="Segoe UI"
+                               FontSize="40.3"
+                               FontWeight="SemiBold"
+                               Foreground="#68000000"
+                               Margin="1.5,1.5,0,0"
+                               Width="190"
+                               TextWrapping="NoWrap"
+                               TextTrimming="CharacterEllipsis"
+                               VerticalAlignment="Top"/>
+
+                    <TextBlock x:Name="CityText"
+                               Text=""
+                               FontFamily="Segoe UI"
+                               FontSize="40.3"
+                               FontWeight="SemiBold"
+                               Foreground="#FF90CAF9"
+                               Width="190"
+                               TextWrapping="NoWrap"
+                               TextTrimming="CharacterEllipsis"
+                               VerticalAlignment="Top"
+                               ToolTipService.InitialShowDelay="250"
+                               ToolTipService.BetweenShowDelay="0"
+                               ToolTipService.ShowDuration="6000"/>
+                </Grid>
+
+                <!-- WEATHER FIELD: current conditions only -->
+                <Grid Grid.Column="2"
+                      Height="54"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="78"/>
+                        <ColumnDefinition Width="18"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock x:Name="WeatherIconShadow"
+                               Grid.Column="0"
+                               Text="☁"
+                               FontFamily="Segoe UI Symbol"
+                               FontSize="40.3"
+                               Foreground="#68000000"
+                               Margin="1.5,1.5,0,0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Top"/>
+
+                    <TextBlock x:Name="WeatherIconText"
+                               Grid.Column="0"
+                               Text="☁"
+                               FontFamily="Segoe UI Symbol"
+                               FontSize="40.3"
+                               Foreground="#FFD7DCE2"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Top"/>
+
+                    <TextBlock x:Name="WeatherShadow"
+                               Grid.Column="2"
+                               Text="68℉"
+                               FontFamily="Segoe UI"
+                               FontSize="40.3"
+                               FontWeight="Normal"
+                               Foreground="#68000000"
+                               Margin="1.5,1.5,0,0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"/>
+
+                    <TextBlock x:Name="WeatherText"
+                               Grid.Column="2"
+                               Text="68℉"
+                               FontFamily="Segoe UI"
+                               FontSize="40.3"
+                               FontWeight="Normal"
+                               Foreground="White"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               ToolTipService.InitialShowDelay="250"
+                               ToolTipService.BetweenShowDelay="0"
+                               ToolTipService.ShowDuration="6000"/>
+                </Grid>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

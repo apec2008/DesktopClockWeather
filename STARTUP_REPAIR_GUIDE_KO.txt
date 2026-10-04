@@ -1,0 +1,17 @@
+Desktop Clock Weather V1.1 - Startup Repair Guide
+
+V1.1부터 VBScript/cscript.exe를 사용하지 않습니다.
+
+1. Build_EXE.bat를 실행합니다.
+2. 빌드가 끝나면 C# 프로그램 자체가 Windows 사용자 시작 등록(HKCU Run)을 설정합니다.
+3. 다음 두 파일이 생성/갱신되었는지 확인합니다.
+   %APPDATA%\DesktopClockWeather\V1.1\StartupState.json
+   %APPDATA%\DesktopClockWeather\V1.1\STARTUP_INSTALL_REPORT.txt
+4. STARTUP_INSTALL_REPORT.txt에서 다음을 확인합니다.
+   Build: V1.1-release
+   Success: True
+   Method: HKCU Run (no VBScript/cscript.exe)
+5. 이후 재부팅하여 StartupState.json의 DesiredProfiles만 복원되는지 확인합니다.
+
+최초 StartupState.json이 없는 경우 기본 working set은 Default(Seoul) + Default2(Ann Arbor)입니다.
+그 다음부터는 사용자가 실제로 열어 둔/닫은 Profile 상태가 StartupState.json에 저장됩니다.

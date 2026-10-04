@@ -1,0 +1,21 @@
+Desktop Clock Weather V1.1 build log
+Build started: 2026-09-16 (수)  9:06:19.51
+Folder: D:\01. Personal\09. 인공지능 프로그래밍 (바이브 코딩)\DesktopClockWeather\DesktopClockWeather_V1.1_Source_Final
+User V1.1 folder: C:\Users\ASUS\AppData\Roaming\DesktopClockWeather\V1.1
+Startup mode: Task Scheduler logon trigger with automatic Startup-folder fallback
+
+Removed stale STARTUP_INSTALL_REPORT.txt before this build.
+C:\Program Files\dotnet\dotnet.exe
+8.0.425
+  Determining projects to restore...
+  Restored D:\01. Personal\09. 인공지능 프로그래밍 (바이브 코딩)\DesktopClockWeather\DesktopClockWeather_V1.1_Source_Final\DesktopClockWeather.csproj (in 1.08 sec).
+  DesktopClockWeather -> D:\01. Personal\09. 인공지능 프로그래밍 (바이브 코딩)\DesktopClockWeather\DesktopClockWeather_V1.1_Source_Final\bin\Release\net8.0-windows\win-x64\DesktopClockWeather.dll
+  DesktopClockWeather -> D:\01. Personal\09. 인공지능 프로그래밍 (바이브 코딩)\DesktopClockWeather\DesktopClockWeather_V1.1_Source_Final\publish\
+        1 file(s) copied.
+StartupState.json already exists; preserving the user's current working set.
+Calling V1.1 --install-fast-startup...
+Fast startup installer return code: 0
+VERIFIED active startup mode: TaskSchedulerFast
+VERIFIED startup state: C:\Users\ASUS\AppData\Roaming\DesktopClockWeather\V1.1\StartupState.json
+VERIFIED startup report: C:\Users\ASUS\AppData\Roaming\DesktopClockWeather\V1.1\STARTUP_INSTALL_REPORT.txt
+SUCCESS: D:\01. Personal\09. 인공지능 프로그래밍 (바이브 코딩)\DesktopClockWeather\DesktopClockWeather_V1.1_Source_Final\DesktopClockWeather_V1.1.exe

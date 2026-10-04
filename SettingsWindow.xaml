@@ -1,0 +1,277 @@
+<Window x:Class="DesktopClockWeather.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Desktop Clock Weather - Settings   V1.1"
+        Width="620"
+        Height="790"
+        MinWidth="540"
+        MinHeight="460"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResizeWithGrip"
+        Background="#FFF3F3F3"
+        FontFamily="Segoe UI Variable Text, Segoe UI"
+        FontSize="14"
+        FontWeight="Bold">
+
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="BorderBrush" Value="#FFC7C7C7"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="BorderBrush" Value="#FFC7C7C7"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Padding" Value="16,4"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FFB9B9B9"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FFD8D8D8"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="18,14"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#60000000"
+                                      BlurRadius="5"
+                                      ShadowDepth="1"
+                                      Opacity="0.16"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="LabelStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#FF202020"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="8,0,12,0"/>
+        </Style>
+    </Window.Resources>
+
+    <DockPanel Margin="22,20,22,18" LastChildFill="True">
+
+        <StackPanel DockPanel.Dock="Bottom"
+                    Margin="0,14,0,0">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <Button Content="OK"
+                        Width="96"
+                        Margin="0,0,10,0"
+                        IsDefault="True"
+                        Click="Ok_Click"/>
+                <Button Content="Cancel"
+                        Width="96"
+                        IsCancel="True"/>
+            </StackPanel>
+
+            <TextBlock Text="Developed by D.J. Lee"
+                       HorizontalAlignment="Center"
+                       Foreground="#FF7A7A7A"
+                       FontSize="12"
+                       FontWeight="Normal"
+                       Margin="0,10,0,0"/>
+        </StackPanel>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <StackPanel>
+
+                <!-- City drives BOTH clock time zone and weather location -->
+                <Border Style="{StaticResource CardStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="175"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="48"/>
+                            <RowDefinition Height="48"/>
+                            <RowDefinition Height="48"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0"
+                                   Style="{StaticResource LabelStyle}"
+                                   Text="City"/>
+
+                        <Grid Grid.Row="0" Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="105"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="CityBox" Grid.Column="0" KeyDown="CityBox_KeyDown"/>
+                            <Button x:Name="ResolveButton"
+                                    Grid.Column="2"
+                                    Content="Find city"
+                                    Click="ResolveButton_Click"/>
+                        </Grid>
+
+                        <TextBlock Grid.Row="1"
+                                   Style="{StaticResource LabelStyle}"
+                                   Text="Resolved location"/>
+
+                        <TextBlock x:Name="ResolvedLocationText"
+                                   Grid.Row="1"
+                                   Grid.Column="1"
+                                   Foreground="#FF666666"
+                                   Text="Not resolved yet"/>
+
+                        <TextBlock Grid.Row="2"
+                                   Style="{StaticResource LabelStyle}"
+                                   Text="Manual time adjustment"/>
+
+                        <ComboBox x:Name="ManualOffsetBox"
+                                  Grid.Row="2"
+                                  Grid.Column="1"
+                                  Width="170"
+                                  HorizontalAlignment="Left"/>
+                    </Grid>
+                </Border>
+
+                <Border Style="{StaticResource CardStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="175"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="48"/>
+                            <RowDefinition Height="48"/>
+                            <RowDefinition Height="48"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0"
+                                   Style="{StaticResource LabelStyle}"
+                                   Text="Time format"/>
+
+                        <StackPanel Grid.Row="0"
+                                    Grid.Column="1"
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Center">
+                            <RadioButton x:Name="Hour12"
+                                         Content="12 hour"
+                                         Margin="4,0,28,0"
+                                         VerticalAlignment="Center"/>
+                            <RadioButton x:Name="Hour24"
+                                         Content="24 hour"
+                                         VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <TextBlock Grid.Row="1"
+                                   Style="{StaticResource LabelStyle}"
+                                   Text="Display"/>
+
+                        <StackPanel Grid.Row="1"
+                                    Grid.Column="1"
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Center">
+                            <CheckBox x:Name="SecondsBox"
+                                      Content="Seconds"
+                                      Margin="4,0,24,0"
+                                      VerticalAlignment="Center"/>
+                            <CheckBox x:Name="YearBox"
+                                      Content="Year"
+                                      Margin="0,0,24,0"
+                                      VerticalAlignment="Center"/>
+                            <CheckBox x:Name="WeatherBox"
+                                      Content="Weather"
+                                      VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <TextBlock Grid.Row="2"
+                                   Style="{StaticResource LabelStyle}"
+                                   Text="Temperature"/>
+
+                        <ComboBox x:Name="TemperatureUnitBox"
+                                  Grid.Row="2"
+                                  Grid.Column="1"
+                                  Width="170"
+                                  HorizontalAlignment="Left"/>
+                    </Grid>
+                </Border>
+
+                <Border Style="{StaticResource CardStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="175"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="48"/>
+                            <RowDefinition Height="48"/>
+                            <RowDefinition Height="48"/>
+                            <RowDefinition Height="48"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Style="{StaticResource LabelStyle}" Text="Font color"/>
+                        <ComboBox x:Name="FontColorBox" Grid.Row="0" Grid.Column="1"/>
+
+                        <TextBlock Grid.Row="1" Style="{StaticResource LabelStyle}" Text="City color"/>
+                        <ComboBox x:Name="CityColorBox" Grid.Row="1" Grid.Column="1"/>
+
+                        <TextBlock Grid.Row="2" Style="{StaticResource LabelStyle}" Text="Glow color"/>
+                        <ComboBox x:Name="GlowColorBox" Grid.Row="2" Grid.Column="1"/>
+
+                        <TextBlock Grid.Row="3" Style="{StaticResource LabelStyle}" Text="Clock size"/>
+                        <ComboBox x:Name="ScaleBox" Grid.Row="3" Grid.Column="1" Width="170" HorizontalAlignment="Left"/>
+                    </Grid>
+                </Border>
+
+                <Border Style="{StaticResource CardStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="175"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Style="{StaticResource LabelStyle}" Text="Weather refresh"/>
+
+                        <StackPanel Grid.Column="1"
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Center">
+                            <TextBox x:Name="RefreshBox" Width="74"/>
+                            <TextBlock Text="minutes"
+                                       Margin="10,0,0,0"
+                                       Foreground="#FF555555"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <TextBlock Margin="10,2,10,6"
+                           Foreground="#FF6B6B6B"
+                           FontWeight="Normal"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Top"
+                           Text="City search sets both the clock time zone and weather location. Celsius is the default temperature unit. Clock size changes the entire widget uniformly from -30% to +30% in 10% steps."/>
+
+                <TextBlock Margin="10,0,10,12"
+                           Foreground="#FF6B6B6B"
+                           FontWeight="Normal"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Top"
+                           Text="Up to 3 clock windows can be displayed."/>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</Window>

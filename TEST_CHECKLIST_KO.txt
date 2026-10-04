@@ -1,0 +1,28 @@
+Desktop Clock Weather V1.1 - 안정화 체크리스트
+
+A. 설치
+1. Build_EXE.bat 실행 -> SUCCESS 확인
+2. DesktopClockWeather_V1.1.exe 생성 확인
+3. STARTUP_INSTALL_REPORT.txt -> Success: True 확인
+4. ActiveMode 확인(TaskSchedulerFast 또는 StartupFolderFallback)
+
+B. Clean Install
+1. Uninstall_DesktopClockWeather.bat 실행 -> Y
+2. Build_EXE.bat 재실행
+3. 재부팅 -> Seoul + Ann Arbor, 둘 다 0%, 겹치지 않게 표시
+
+C. Working set / Reboot
+1. 3번째 창 추가 -> 재부팅 -> 3개 복원
+2. 1개 창 종료 -> 재부팅 -> 남은 창만 복원
+3. 도시/색상/온도단위/Scale/위치 유지 확인
+
+D. 전원/디스플레이
+1. Sleep/Wake 3회 이상
+2. 노트북 덮개 Close/Open 3회 이상
+3. 위치 이동이 허용 가능한 수준인지 확인
+
+E. UI
+1. Scale 0 -> +30 -> 0 -> -30 -> 0, 오른쪽 시각 기준점 유지
+2. 긴 도시명 ToolTip 전체 표시
+3. 온도 ToolTip 한국어/영어 자동 표시 로직 유지
+4. 4번째 창 실행 차단

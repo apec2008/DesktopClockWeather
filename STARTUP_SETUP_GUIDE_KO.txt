@@ -1,0 +1,27 @@
+Desktop Clock Weather V1.1 - 신규 설치 안내
+
+[설치]
+1. ZIP을 새 폴더에 압축 해제합니다.
+2. Build_EXE.bat를 실행합니다.
+3. 마지막에 SUCCESS 문구가 표시되는지 확인합니다.
+4. %APPDATA%\DesktopClockWeather\V1.1\STARTUP_INSTALL_REPORT.txt 를 열어
+   Success: True 를 확인합니다.
+5. ActiveMode가 TaskSchedulerFast이면 빠른 시작 모드가 활성화된 것입니다.
+   StartupFolderFallback이면 표준 시작 방식으로 자동 전환된 상태이며 오류가 아닙니다.
+6. 재부팅합니다.
+7. 최초 설치에서는 Seoul + Ann Arbor 두 창이 0% 크기로 표시되는지 확인합니다.
+
+[보안 프로그램]
+일부 백신/보안 프로그램은 자동 시작 등록을 차단할 수 있습니다.
+그 경우에만 해당 제품의 허용/예외 기능을 사용한 뒤 Build_EXE.bat를 다시 실행하십시오.
+설치 성공 후에는 정상 보호 상태로 사용하십시오.
+
+[업데이트]
+기존 V1.1 사용자가 새 V1.1 빌드를 설치하면 기존 프로필과 StartupState를 보존합니다.
+Uninstall 후 재설치는 모든 V1.1 사용자 설정을 초기화하는 Clean Install 시험입니다.
+
+[문제 발생 시]
+- BUILD_LOG.txt
+- %APPDATA%\DesktopClockWeather\V1.1\STARTUP_INSTALL_REPORT.txt
+- %APPDATA%\DesktopClockWeather\V1.1\logs\DesktopClockWeather-YYYYMMDD.log
+위 파일을 우선 확인합니다. 추측으로 반복 설치하지 않습니다.

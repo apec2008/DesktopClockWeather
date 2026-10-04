@@ -1,0 +1,6 @@
+# Desktop Clock Weather V1.1 startup timing configuration
+# Which clock windows reopen after reboot is stored ONLY in:
+# %APPDATA%\DesktopClockWeather\V1.1\StartupState.json
+# Historical StartupCount= / Profile= entries are ignored by V1.1.
+DelaySeconds=2
+BetweenMilliseconds=500
